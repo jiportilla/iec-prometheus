@@ -7,7 +7,7 @@ Inspired by [other awesome sites](#other-awesome-sites).
 
 ## Contents
 
-1. [Configuration files](config/readme.md)
+1. [Configuration files] are available at: (config/)
 
 ## other-awesome-sites
 https://github.com/free/sql_exporter
