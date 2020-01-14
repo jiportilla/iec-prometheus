@@ -7,7 +7,8 @@ Inspired by [other awesome sites](#other-awesome-sites).
 
 ## Contents
 
-1. [Configuration](#config)
+1. [Configuration]
+https://github.com/jiportilla/iec-prometheus/tree/master/config
 
 ## other-awesome-sites
 https://github.com/free/sql_exporter
