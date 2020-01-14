@@ -1,7 +1,7 @@
 Config files are:
 
 ## Prometheus
-config.yml
+prometheus.yml
 
 ## SQL Exporter
 sql.yml
