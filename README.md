@@ -1,4 +1,4 @@
-# IEC-prometheus
+# IEC-Prometheus
 IBM Edge Computing Monitoring with Prometheus
 
 
