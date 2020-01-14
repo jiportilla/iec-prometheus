@@ -12,4 +12,6 @@ Configuration files are available [here](config/)
 Proposed [design](config/IEC-Prometheus.png)
 
 ## other-awesome-sites
+[IBM Edge Computing](https://www.ibm.com/cloud/edge-computing)
+<br>
 https://github.com/free/sql_exporter
