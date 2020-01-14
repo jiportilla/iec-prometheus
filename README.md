@@ -9,5 +9,7 @@ Inspired by [other awesome sites](#other-awesome-sites).
 
 Configuration files are available [here](config/)
 
+Proposed [design](config/IEC-Prometheus.png)
+
 ## other-awesome-sites
 https://github.com/free/sql_exporter
