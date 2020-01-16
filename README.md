@@ -9,7 +9,7 @@ Inspired by [other awesome sites](#other-awesome-sites).
 
 Configuration files are available [here](config/)
 
-Proposed [design](config/IEC-Prometheus.png)
+Proposed [design](config//IEC-Prometheus-011520.png)
 
 ## other-awesome-sites
 [IBM Edge Computing](https://www.ibm.com/cloud/edge-computing)
