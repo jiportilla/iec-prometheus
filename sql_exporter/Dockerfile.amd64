@@ -1,0 +1,17 @@
+#https://github.com/free/sql_exporter/blob/master/Dockerfile
+
+FROM githubfree/sql_exporter
+#FROM quay.io/prometheus/golang-builder AS builder
+
+# Copy config files & sql_exporter binary
+ADD *.yml   /go/src/github.com/free/sql_exporter/
+ADD sql_exporter   /go/src/github.com/free/sql_exporter/
+
+WORKDIR /go/src/github.com/free/sql_exporter
+
+
+#COPY        --from=builder /go/src/github.com/free/sql_exporter/sql_exporter  /bin/sql_exporter
+
+EXPOSE      9399
+#ENTRYPOINT  [ "/bin/sql_exporter" ]
+#ENTRYPOINT  [ "/go/src/github.com/free/sql_exporter" ]

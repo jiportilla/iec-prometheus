@@ -2,4 +2,9 @@
 
 FROM grafana/grafana
 
+#ADD graphana.db /var/lib/grafana/
+
 #ADD grafana.ini conf/
+#ENV GF_AUTH_DISABLE_LOGIN_FORM "true"
+ENV GF_AUTH_ANONYMOUS_ENABLED "true"
+ENV GF_AUTH_ANONYMOUS_ORG_ROLE "Admin"

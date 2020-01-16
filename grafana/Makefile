@@ -1,4 +1,4 @@
-# Make targets for building the IBM Edge Computing Prometheus container
+# Make targets for building the IBM Edge Computing Grafana container
 
 # Transform the machine arch into some standard values: "arm", "arm64", or "amd64". 
 # Note: ppc64le already returns ppc64le, so we do not need to change that.
@@ -11,6 +11,11 @@ ARCH ?= $(SYSTEM_ARCH)
 PORT_NUM ?= 3000
 DOCKER_NAME ?= iec-grafana
 
+PWD ?= $(shell pwd)
+
+#ID=$(id -u) # saves your user id in the ID variable
+ID ?=$(id -F)
+
 default: all
 
 all: build run
@@ -20,7 +25,10 @@ build:
 	docker build -t $(DOCKER_NAME) -f ./Dockerfile.$(ARCH) .
 	
 run:
-	docker run -p=$(PORT_NUM):$(PORT_NUM) --name="$(DOCKER_NAME)" $(DOCKER_NAME)
+	#docker run -p=$(PORT_NUM):$(PORT_NUM) --name="$(DOCKER_NAME)" $(DOCKER_NAME)
+	docker run --volume "$(PWD)/data:/var/lib/grafana" -p=$(PORT_NUM):$(PORT_NUM) --name="$(DOCKER_NAME)" $(DOCKER_NAME)
+	#-v $(pwd)/provisioning:/etc/grafana/provisioning $(DOCKER_NAME)
+	#https://riamf.github.io/posts/dockerized_grafana_setup/
 	
 # Stop and remove a running container
 stop: 
