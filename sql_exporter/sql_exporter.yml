@@ -21,7 +21,7 @@ target:
   # data_source_name: 'sqlserver://prom_user:prom_password@dbserver1.example.com:1433'
   # data_source_name: 'postgres://postgres_user:@127.0.0.1:5432/postgres_db?sslmode=disable'
   
-  data_source_name: 'postgres://ivanp:@9.16.148.124:5432/exchange?sslmode=disable'
+  data_source_name: 'postgres://ivanp:@demoserver:5432/exchange?sslmode=disable'
 
   # Collectors (referenced by name) to execute on the target.
   collectors: [postgres_standard]
