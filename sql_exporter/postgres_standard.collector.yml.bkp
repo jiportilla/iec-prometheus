@@ -41,19 +41,6 @@ metrics:
     values:
       - agbot_agreement_creation_time
     query_ref: postgres_agbot_agreement_service_id
-    
-  - metric_name: exchange_nodeerror_errors
-    type: gauge
-    help: 'exchange nodeerror:: errors'
-    key_labels:
-      - nodeid
-      - service
-      - event_code
-      - message
-    value_label: error_lastupdated 
-    values:
-      - node_error_lastupdated 
-    query_ref: exchange_nodeerror
        
 queries:
   # Populates `postgres_agbot_agreement_creation_time`,.
@@ -80,15 +67,5 @@ queries:
         agreement::jsonb ->> 'service_id' as agbot_agreement_service_id,
         "agreement_id"  as agreement_id
       FROM public.agreements
-      
-    # Populates `exchange_nodeerror_errors`,.
-  - query_name: exchange_nodeerror 
-    query: |
-      SELECT  
-        EXTRACT(EPOCH FROM (substring("lastUpdated" from 1 for 24)::timestamp ) ) AS node_error_lastupdated,
-        (to_json("errors")::JSONB ->>0)::JSONB ->0 -> 'workload' -> 'url' AS service,
-        (to_json("errors")::JSONB ->>0)::JSONB ->0 -> 'event_code'  AS event_code,
-        (to_json("errors")::JSONB ->>0)::JSONB ->0 -> 'message'   as message,
-        "nodeid" as nodeid 
-      FROM public.nodeerror
+
 #

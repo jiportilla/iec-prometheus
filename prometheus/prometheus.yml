@@ -20,3 +20,38 @@ scrape_configs:
     scrape_interval: 30s
     static_configs:
       - targets: ['demoserver:9100']
+
+  - job_name: 'node_exporter-144-13'
+    scrape_interval: 30s
+    static_configs:
+      - targets: ['9.16.144.13:9100']
+
+  - job_name: 'node_exporter-108'
+    scrape_interval: 30s
+    static_configs:
+      - targets: ['9.17.36.108:9100']
+
+  - job_name: 'node_exporter-129'
+    scrape_interval: 30s
+    static_configs:
+      - targets: ['9.17.36.129:9100']
+
+  - job_name: 'node_exporter-132'
+    scrape_interval: 30s
+    static_configs:
+      - targets: ['9.17.36.132:9100']
+
+  - job_name: 'node_exporter-135'
+    scrape_interval: 30s
+    static_configs:
+      - targets: ['9.17.36.135:9100']
+
+  - job_name: 'node_exporter-52.116.2.26'
+    scrape_interval: 30s
+    static_configs:
+      - targets: ['52.116.2.26:9100']
+
+  - job_name: 'node_exporter-192.168.1.54'
+    scrape_interval: 30s
+    static_configs:
+      - targets: ['192.168.1.54:9100']
