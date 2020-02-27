@@ -269,13 +269,301 @@
     },
     {
       "cacheTimeout": null,
+      "columns": [],
+      "datasource": "Prometheus",
+      "description": "",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 16,
+      "links": [],
+      "options": {},
+      "pageSize": null,
+      "showHeader": true,
+      "sort": {
+        "col": null,
+        "desc": false
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "align": "auto",
+          "dateFormat": "MM/DD/YY h:mm:ss a",
+          "pattern": "Time",
+          "type": "hidden"
+        },
+        {
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "instance",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "job",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "alias": "Creation Time",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "MM/DD/YY h:mm:ss a",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Value #B",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "alias": "Finalized Time",
+          "align": "",
+          "colorMode": null,
+          "colors": [
+            "#FFCB7D",
+            "#E02F44",
+            "#96D98D"
+          ],
+          "dateFormat": "MM/DD/YY h:mm:ss a",
+          "decimals": null,
+          "link": false,
+          "mappingType": 2,
+          "pattern": "Value #C",
+          "preserveFormat": false,
+          "rangeMaps": [
+            {
+              "from": "0",
+              "text": "WARNING",
+              "to": "0"
+            },
+            {
+              "from": "1",
+              "text": "",
+              "to": "90000000000"
+            }
+          ],
+          "sanitize": false,
+          "thresholds": [
+            "0"
+          ],
+          "type": "number",
+          "unit": "dateTimeAsUS",
+          "valueMaps": [
+            {
+              "text": "",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "agreement_inception_time",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "agreement_finalized_time",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "agreement_creation_time",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "alias": "Inception Time",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "MM/DD/YY h:mm:ss a",
+          "decimals": 2,
+          "link": false,
+          "mappingType": 1,
+          "pattern": "Value #A",
+          "thresholds": [],
+          "type": "date",
+          "unit": "dateTimeAsUS"
+        },
+        {
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "__name__",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "alias": "Agreement ID",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "agreement_id",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Duration",
+          "align": "auto",
+          "colorMode": "value",
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "Value #D",
+          "thresholds": [],
+          "type": "number",
+          "unit": "s"
+        },
+        {
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "agreement_delta_time",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "expr": "postgres_agbot_agreement_inception_time*1000",
+          "format": "table",
+          "instant": true,
+          "refId": "A"
+        },
+        {
+          "expr": "postgres_agbot_agreement_creation_time*1000",
+          "format": "table",
+          "instant": true,
+          "refId": "B"
+        },
+        {
+          "expr": "postgres_agbot_agreement_finalized_time*1000",
+          "format": "table",
+          "instant": true,
+          "refId": "C"
+        },
+        {
+          "expr": "postgres_agbot_agreement_delta_time",
+          "format": "table",
+          "instant": true,
+          "refId": "D"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Agreements Lifecycle",
+      "transform": "table",
+      "type": "table"
+    },
+    {
+      "cacheTimeout": null,
       "datasource": "Prometheus",
       "description": "Agreements without finalized time",
       "gridPos": {
         "h": 7,
         "w": 10,
         "x": 0,
-        "y": 6
+        "y": 12
       },
       "id": 15,
       "links": [],
@@ -336,7 +624,7 @@
         "h": 7,
         "w": 14,
         "x": 10,
-        "y": 6
+        "y": 12
       },
       "id": 13,
       "options": {},
@@ -513,7 +801,7 @@
         "h": 8,
         "w": 10,
         "x": 0,
-        "y": 13
+        "y": 19
       },
       "id": 4,
       "options": {},
@@ -639,7 +927,7 @@
         "h": 8,
         "w": 14,
         "x": 10,
-        "y": 13
+        "y": 19
       },
       "id": 2,
       "options": {},
@@ -764,7 +1052,7 @@
         "h": 9,
         "w": 10,
         "x": 0,
-        "y": 21
+        "y": 27
       },
       "id": 10,
       "options": {},
@@ -906,7 +1194,7 @@
         "h": 8,
         "w": 14,
         "x": 10,
-        "y": 21
+        "y": 27
       },
       "id": 12,
       "options": {},
@@ -1103,5 +1391,5 @@
   "timezone": "browser",
   "title": "Agreements Lifecycle",
   "uid": "R7lUQyEZk",
-  "version": 28
+  "version": 31
 }

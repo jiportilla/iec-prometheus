@@ -9,6 +9,7 @@ collector_name: postgres_standard
 
 # Similar to global.min_interval, but applies to the queries defined by this collector only.
 #min_interval: 0s
+#agreement_inception_time
 
 metrics:
   - metric_name: postgres_agbot_agreement_creation_time
@@ -20,7 +21,17 @@ metrics:
     values:
       - agbot_agreement_creation_time
     query_ref: postgres_agbot_agreement_creation_time
-    
+
+  - metric_name: postgres_agbot_agreement_inception_time
+    type: gauge
+    help: 'Agreement:: agreement_inception_time'
+    key_labels:
+      - agreement_id
+    value_label: agreement_inception_time
+    values:
+      - agbot_agreement_inception_time
+    query_ref: postgres_agbot_agreement_inception_time
+
   - metric_name: postgres_agbot_agreement_finalized_time
     type: gauge
     help: 'Agreement:: agreement_finalized_time'
@@ -30,20 +41,128 @@ metrics:
     values:
       - agbot_agreement_finalized_time
     query_ref: postgres_agbot_agreement_finalized_time
-       
+
+  - metric_name: postgres_agbot_agreement_finalized_time_null
+    type: gauge
+    help: 'Agreement:: agreement_finalized_time_null'
+    key_labels:
+      - agreement_id
+    value_label: agreement_finalized_time_null
+    values:
+      - agbot_agreement_finalized_time_null
+    query_ref: postgres_agbot_agreement_finalized_time_null
+
+  - metric_name: postgres_agbot_agreement_service_id
+    type: gauge
+    help: 'Agreement:: agreement_service_id'
+    key_labels:
+      - agreement_id
+      - agbot_agreement_service_id
+    value_label: agreement_creation_time
+    values:
+      - agbot_agreement_creation_time
+    query_ref: postgres_agbot_agreement_service_id
+
+  - metric_name: exchange_nodeerror_errors
+    type: gauge
+    help: 'exchange nodeerror:: errors'
+    key_labels:
+      - nodeid
+      - service
+      - event_code
+      - message
+    value_label: error_lastupdated
+    values:
+      - node_error_lastupdated
+    query_ref: exchange_nodeerror
+
+  - metric_name: agbot_partitions
+    type: gauge
+    help: 'agbot partitions:: heartbeat'
+    key_labels:
+      - partitions_id
+      - partitions_owner
+    value_label: heartbeat
+    values:
+      - heartbeat
+    query_ref: agbot_partitions
+
+  - metric_name: agbot_partitions_count
+    type: gauge
+    help: 'agbot partitions:: count'
+    value_label: agbot_partitions_count
+    values:
+      - partitions_count
+    query_ref: agbot_partitions_row_count
+
 queries:
   # Populates `postgres_agbot_agreement_creation_time`,.
-  - query_name: postgres_agbot_agreement_creation_time 
+  - query_name: postgres_agbot_agreement_creation_time
     query: |
       SELECT
         agreement::jsonb ->> 'agreement_creation_time' as agbot_agreement_creation_time,
         "agreement_id"  as agreement_id
       FROM public.agreements
-      
-    # Populates `postgres_agbot_agreement_finalized_time`,.
-  - query_name: postgres_agbot_agreement_finalized_time 
+
+  # Populates `postgres_agbot_agreement_inception_time`,.
+  - query_name: postgres_agbot_agreement_inception_time
     query: |
-      SELECT  
+      SELECT
+        agreement::jsonb ->> 'agreement_inception_time' as agbot_agreement_inception_time,
+        "agreement_id"  as agreement_id
+      FROM public.agreements
+
+  # Populates `postgres_agbot_agreement_finalized_time`,.
+  - query_name: postgres_agbot_agreement_finalized_time
+    query: |
+      SELECT
         agreement::jsonb ->> 'agreement_finalized_time' as agbot_agreement_finalized_time,
         "agreement_id"  as agreement_id
       FROM public.agreements
+      where  agreement::jsonb ->> 'agreement_finalized_time' not in ('0')
+
+  # Populates `postgres_agbot_agreement_finalized_time_null`,.
+  - query_name: postgres_agbot_agreement_finalized_time_null
+    query: |
+      SELECT
+        agreement::jsonb ->> 'agreement_finalized_time' as agbot_agreement_finalized_time_null,
+        "agreement_id"  as agreement_id
+      FROM public.agreements
+      where  agreement::jsonb ->> 'agreement_finalized_time' in ('0')
+
+  # Populates `postgres_agbot_agreement_service_id`,.
+  - query_name: postgres_agbot_agreement_service_id
+    query: |
+      SELECT
+        agreement::jsonb ->> 'agreement_creation_time' as agbot_agreement_creation_time,
+        agreement::jsonb ->> 'service_id' as agbot_agreement_service_id,
+        "agreement_id"  as agreement_id
+      FROM public.agreements
+
+  # Populates `exchange_nodeerror_errors`,.
+  - query_name: exchange_nodeerror
+    query: |
+      SELECT
+        EXTRACT(EPOCH FROM (substring("lastUpdated" from 1 for 24)::timestamp ) ) AS node_error_lastupdated,
+        (to_json("errors")::JSONB ->>0)::JSONB ->0 -> 'workload' -> 'url' AS service,
+        (to_json("errors")::JSONB ->>0)::JSONB ->0 -> 'event_code'  AS event_code,
+        (to_json("errors")::JSONB ->>0)::JSONB ->0 -> 'message'   as message,
+        "nodeid" as nodeid
+      FROM public.nodeerror
+      
+  # Populates `agbot_partitions_count`,.
+  - query_name: agbot_partitions_row_count
+    query: |
+      SELECT
+        COUNT (*) as partitions_count
+      FROM public.partitions
+
+  # Populates `agbot_partitions_heartbeat`,.
+  - query_name: agbot_partitions
+    query: |
+      SELECT
+        EXTRACT(EPOCH FROM ("heartbeat" ) ) AS heartbeat,
+        "id" as partitions_id,
+        "owner" as partitions_owner
+      FROM public.partitions
+#

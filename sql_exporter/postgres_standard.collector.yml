@@ -52,6 +52,17 @@ metrics:
       - agbot_agreement_finalized_time_null
     query_ref: postgres_agbot_agreement_finalized_time_null
 
+  - metric_name: postgres_agbot_agreement_delta_time
+    type: gauge
+    help: 'Agreement:: agreement_delta_time'
+    key_labels:
+      - agreement_id
+    value_label: agreement_delta_time
+    values:
+      - agbot_agreement_delta_time
+    query_ref: postgres_agbot_agreement_delta_time
+
+
   - metric_name: postgres_agbot_agreement_service_id
     type: gauge
     help: 'Agreement:: agreement_service_id'
@@ -129,6 +140,15 @@ queries:
         "agreement_id"  as agreement_id
       FROM public.agreements
       where  agreement::jsonb ->> 'agreement_finalized_time' in ('0')
+
+  # Populates `postgres_agbot_agreement_delta_time`,.
+  - query_name: postgres_agbot_agreement_delta_time
+    query: |
+      SELECT
+        NULLIF(regexp_replace(agreement::jsonb ->> 'agreement_finalized_time', '\D','','g'), '')::numeric -  NULLIF(regexp_replace(agreement::jsonb ->> 'agreement_inception_time', '\D','','g'), '')::numeric as agbot_agreement_delta_time,
+        "agreement_id"  as agreement_id
+      FROM public.agreements
+      where  agreement::jsonb ->> 'agreement_finalized_time' not in ('0')
 
   # Populates `postgres_agbot_agreement_service_id`,.
   - query_name: postgres_agbot_agreement_service_id
