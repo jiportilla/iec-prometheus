@@ -1,5 +1,7 @@
 #https://github.com/free/sql_exporter/blob/master/Dockerfile
 
+#https://hub.docker.com/r/githubfree/sql_exporter/dockerfile
+
 #FROM alpine:latest
 FROM githubfree/sql_exporter
 

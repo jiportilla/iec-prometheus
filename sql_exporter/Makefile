@@ -22,13 +22,15 @@ SYSTEM_ARCH := $(shell uname -m | sed -e 's/aarch64.*/arm64/' -e 's/x86_64.*/amd
 ARCH ?= $(SYSTEM_ARCH)
 DOCKER_NAME ?= sql_exporter
 PORT_NUM ?= 9399
+PORT_EXT ?= 9398
+
 
 default: all
 
 all: build run
 	
 run:
-	docker run -p=$(PORT_NUM):$(PORT_NUM) --name="$(DOCKER_NAME)" $(DOCKER_NAME)
+	docker run -p=$(PORT_EXT):$(PORT_NUM) --name="$(DOCKER_NAME)" $(DOCKER_NAME)
 
 build:
 	docker build -t $(DOCKER_NAME) -f ./Dockerfile.$(ARCH) .

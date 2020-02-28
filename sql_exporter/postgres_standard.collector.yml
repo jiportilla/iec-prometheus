@@ -27,6 +27,7 @@ metrics:
     help: 'Agreement:: agreement_inception_time'
     key_labels:
       - agreement_id
+      - agreement_node
     value_label: agreement_inception_time
     values:
       - agbot_agreement_inception_time
@@ -106,6 +107,14 @@ metrics:
       - partitions_count
     query_ref: agbot_partitions_row_count
 
+  - metric_name: agreements_count
+    type: gauge
+    help: 'agreements :: count'
+    value_label: agreements_count
+    values:
+      - agreements_count
+    query_ref: agreements_row_count
+
 queries:
   # Populates `postgres_agbot_agreement_creation_time`,.
   - query_name: postgres_agbot_agreement_creation_time
@@ -120,7 +129,8 @@ queries:
     query: |
       SELECT
         agreement::jsonb ->> 'agreement_inception_time' as agbot_agreement_inception_time,
-        "agreement_id"  as agreement_id
+        "agreement_id"  as agreement_id,
+        agreement::jsonb ->> 'counter_party_address' as agreement_node
       FROM public.agreements
 
   # Populates `postgres_agbot_agreement_finalized_time`,.
@@ -169,13 +179,21 @@ queries:
         (to_json("errors")::JSONB ->>0)::JSONB ->0 -> 'message'   as message,
         "nodeid" as nodeid
       FROM public.nodeerror
-      
+
   # Populates `agbot_partitions_count`,.
   - query_name: agbot_partitions_row_count
     query: |
       SELECT
         COUNT (*) as partitions_count
       FROM public.partitions
+
+
+  # Populates `agreements_count`,.
+  - query_name: agreements_row_count
+    query: |
+      SELECT
+        COUNT (*) AS agreements_count
+      FROM (SELECT DISTINCT agreement FROM public.agreements ) AS agcount
 
   # Populates `agbot_partitions_heartbeat`,.
   - query_name: agbot_partitions
